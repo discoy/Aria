@@ -1,5 +1,6 @@
 apply plugin: 'maven-publish'
-apply plugin: 'signing'
+//移出数字签名
+//apply plugin: 'signing'
 
 ext {
   PUBLISH_GROUP_ID = rootProject.ext.mavenCentralGroupId
@@ -25,16 +26,20 @@ tasks.withType(Javadoc) {
   options {
     encoding "UTF-8"
     charSet 'UTF-8'
-    links "http://docs.oracle.com/javase/7/docs/api"
+    links "http://docs.oracle.com/javase/11/docs/api"
     addStringOption('Xdoclint:none', '-quiet') // 忽略检查@params 和 @return
   }
+  failOnError = false
 }
-
-ext["signing.keyId"] = ''
-ext["signing.password"] = ''
-ext["signing.secretKeyRingFile"] = ''
+//移出数字签名
+//ext["signing.keyId"] = '1'
+//ext["signing.password"] = '1'
+//ext["signing.secretKeyRingFile"] = '2'
 ext["ossrhUsername"] = ''
 ext["ossrhPassword"] = ''
+
+ext["aliyunUserName"] = 'cyxkc2'
+ext["aliyunPassword"] = 'asPY5K8Fle'
 
 File secretPropsFile = project.rootProject.file('local.properties')
 if (secretPropsFile.exists()) {
@@ -214,16 +219,29 @@ afterEvaluate { project ->
 
         def releasesRepoUrl = getReleaseRepositoryUrl()
         def snapshotsRepoUrl = getSnapshotRepositoryUrl()
-        url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        url = version.endsWith('-SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
         credentials {
           username ossrhUsername
           password ossrhPassword
         }
       }
+      maven {
+        name = "aliyun"
+
+        def releasesRepoUrl = getReleaseRepositoryUrl()
+        def snapshotsRepoUrl = getSnapshotRepositoryUrl()
+        url = version.endsWith('-SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+        credentials {
+          username aliyunUserName
+          password aliyunPassword
+        }
+      }
     }
   }
-  signing {
-    sign publishing.publications
-  }
+  //移出数字签名
+//  signing {
+//    sign publishing.publications
+//  }
 }

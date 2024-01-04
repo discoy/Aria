@@ -56,7 +56,7 @@ ext {
   licences = ['Apache-2.0']
 
   // mavenCentral
-  mavenVersion = '3.8.16'
+  mavenVersion = '3.8.17-SNAPSHOT'
   mavenCentralGroupId = 'me.laoyuyu.aria'
   mavenCentralUserID = 'laoyuyu'
   mavenCentralUserName = 'laoyuyu'

@@ -154,10 +154,11 @@ public final class ConnectionHelp {
     if (conn.getRequestProperty("Charset") == null) {
       conn.setRequestProperty("Charset", "UTF-8");
     }
-    if (conn.getRequestProperty("User-Agent") == null) {
-      conn.setRequestProperty("User-Agent",
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
-    }
+    //不添加默认UA
+//    if (conn.getRequestProperty("User-Agent") == null) {
+//      conn.setRequestProperty("User-Agent",
+//          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+//    }
     if (conn.getRequestProperty("Accept") == null) {
       StringBuilder accept = new StringBuilder();
       accept.append("image/gif, ")
