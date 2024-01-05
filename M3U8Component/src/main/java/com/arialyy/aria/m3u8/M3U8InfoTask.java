@@ -353,7 +353,8 @@ final public class M3U8InfoTask implements IInfoTask {
     IBandWidthUrlConverter converter = mM3U8Option.isUseDefConvert() ? new BandWidthDefConverter()
         : mM3U8Option.getBandWidthUrlConverter();
     if (converter != null) {
-      bandWidthM3u8Url = converter.convert(mEntity.getUrl(), bandWidthM3u8Url);
+      //get the real url from the HttpURLConnection,because the url maybe redirect
+      bandWidthM3u8Url = converter.convert(conn.getURL().toString(), bandWidthM3u8Url);
       if (!bandWidthM3u8Url.startsWith("http")) {
         failDownload(String.format("码率转换器转换后的url地址无效，转换后的url：%s", bandWidthM3u8Url), false);
         return;

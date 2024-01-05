@@ -219,7 +219,7 @@ afterEvaluate { project ->
 
         def releasesRepoUrl = getReleaseRepositoryUrl()
         def snapshotsRepoUrl = getSnapshotRepositoryUrl()
-        url = version.endsWith('-SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        url = PUBLISH_VERSION.endsWith('-SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
         credentials {
           username ossrhUsername
@@ -231,8 +231,8 @@ afterEvaluate { project ->
 
         def releasesRepoUrl = getReleaseRepositoryUrl()
         def snapshotsRepoUrl = getSnapshotRepositoryUrl()
-        url = version.endsWith('-SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-
+        url = PUBLISH_VERSION.endsWith('-SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        println("上传的version="+PUBLISH_VERSION+"|url="+url)
         credentials {
           username aliyunUserName
           password aliyunPassword
